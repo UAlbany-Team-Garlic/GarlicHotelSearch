@@ -76,6 +76,16 @@ class User{
     authenticate(password){     //determine if a user really is 
 
     }
+
+    addFavorite(query){
+        this.favID = query.hotelID;
+        database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + this.#userID, this.favID]);
+    }
+
+    removeFavorite(query){
+        this.delID = query.hotelID;
+        database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + this.#userID, this.delID]);
+    }
 }
 
 exports.User = User;
@@ -159,10 +169,18 @@ function deleteUser(query){}
 
 exports.deleteUser = deleteUser;
 
-function addFavorite(){}
+function addFavorite(query, user){
+    this.#userID = user.#userID;
+    this.favID = query.hotelID;
+    database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + this.#userID, this.favID]);
+}
 
 exports.addFavorite = addFavorite;
 
-function removeFavorite(){}
+function removeFavorite(query, user){
+    this.#userID = user.#userID;
+    this.delID = query.hotelID;
+    database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + this.#userID, this.delID]);
+}
 
 exports.removeFavorite = removeFavorite;
