@@ -1,0 +1,19 @@
+include includes/header.pug
+
+script(src="js/makeSearch.js")
+script(src="js/displayData.js")
+
+div(class="container-block no-padding" id='searchContainer')
+    div(class="row" id='row')
+        div(class="twelve col")
+            div(class="col-container" id="searchColContainer")
+                div(class="form" id="searchbar")
+                    h1(class="header" style="color: #fff; font-weight: 500") Search Hotels
+                        div(class="header-icon search-icon") 
+                    input(type="text" placeholder="Boston, MA" class="form" id="searchInput")
+                    button(class="dates")
+                    button(id="searchBtn" class="search" onclick="runSearch()") Search Hotels
+<div id="resultGroup">
+    div(class='container no-padding' style="position: relative")
+        button(class="search" id='searchBack' onclick="runSearch()") Back to search
+          button(class="search" id='numResults') Filter
