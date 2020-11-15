@@ -1,4 +1,8 @@
+
 "use strict";
+
+let process = require('process');
+process.chdir(__dirname);
 
 //================= Lib Imports ========================================================================================
 

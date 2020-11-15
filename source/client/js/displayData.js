@@ -42,5 +42,3 @@ function displayResults() {
     let results = document.getElementById("resultGroup");
     results.classList.toggle("results-active");
 }
-
-export default displayData;

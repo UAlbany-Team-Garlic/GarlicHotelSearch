@@ -1,4 +1,4 @@
-import displayData from './displayData';
+
 //This function is called when the search data is sucessfull returned from the API
 //The data will be in the form of a Listing object array found in /source/server/API.js
 
@@ -23,14 +23,11 @@ function runSearch() {
 
   //Pass Values to the backend's search endpoint
   fetch(
-    "/GarlicSearchEndpoint?search=" +
-    encodedSearchText +
-    "&dates=" +
-    encodedDates +
-    "&beds=" +
-    encodedBeds
+    "/GarlicSearchEndpoint?search=" + encodedSearchText +
+    "&dates=" + encodedDates +
+    "&beds=" + encodedBeds
   )
-    .then((response) => response.json()) //convert return data to json
-    .then((data) => searchSuccessCallback(data)) //do something with our API return data
-    .catch((reason) => searchFailureCallback(reason)); //handle errors
+  .then((response) => response.json()) //convert return data to json
+  .then((data) => searchSuccessCallback(data)) //do something with our API return data
+  .catch((reason) => searchFailureCallback(reason)); //handle errors
 }
