@@ -11,6 +11,10 @@ const session = require("express-session");
 const HotelAPI = require("./API");
 const DatabaseInterface = require("./database");
 const path = require('path');
+const mysql = require("sync-mysql");   
+const databaseCreds = require("./databaseCredentials.json");    //Database Username, Password, and Host
+let database = new mysql(databaseCreds);
+const bcrypt = require("bcrypt");        
 
 //================= Express and Routing Setip ==========================================================================
 
@@ -92,7 +96,6 @@ app.get("/GarlicAccountCreationEndpoint", function(req, res){
         if(newUserReturnObject.errors.length == 0)  //If there were no user creation errors
             req.session.user = newUserReturnObject.user;
         return res.json(newUserReturnObject.makeClientSafe());
-        //return res.redirect("/");
     }
     return res.json(new DatabaseInterface.UserRes(null, ["Can not create an account while having an active user session"]));
 });
@@ -107,7 +110,6 @@ app.get("/GarlicAuthEndpoint", function(req, res){
         if(newUserReturnObject.errors.length == 0)  //If there were no user creation errors
             req.session.user = newUserReturnObject.user;
         return res.json(newUserReturnObject.makeClientSafe());
-        //return res.redirect("/")
     }
     return res.json(new DatabaseInterface.UserRes(null, ["Can not login to an account while already logged in"]));
 });
@@ -115,7 +117,26 @@ app.get("/GarlicAuthEndpoint", function(req, res){
 //Update Handling
 app.get("/GarlicUpdateUserEndpoint", function(req, res){ 
     console.log("User Update Query");
-    console.log(req.body);
+    console.log(req.query);
+    database.query(`UPDATE users SET email='${req.query.email}', phone='${req.query.phone}' WHERE user=?`, [req.session.user.username]);
+    req.session.user.phone = req.query.phone;
+    req.session.user.email = req.query.email;
+    res.redirect("/settings")
+});
+
+app.get("/GarlicUpdateUserEndpointPw", function(req, res){ 
+    console.log("User Update Query");
+    console.log(req.query);
+    var pw = req.query.pw;
+    var pwCheck = req.query.pwCheck;
+    if(pw == pwCheck)
+    {
+        var hash = bcrypt.hashSync(pw, Number(10));
+        database.query(`UPDATE users SET pw='${hash}' WHERE user=?`, [req.session.user.username]);
+        res.redirect("/settings?changepassword=success")
+    }else{
+        res.redirect("/settings?changepassword=passwords%dont%match")
+    }
 });
 
 app.listen(8080);

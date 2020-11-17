@@ -78,6 +78,7 @@ function newUser(){
             return;
         }
         newUserSuccess(response.user);
+        location.reload()
     }).catch(function(reason){  //Unexpected fetch fault 
         newUserError(["Unexpected new user fetch() fault: " + reason]);
     });
@@ -110,5 +111,41 @@ function userLogin(){
         userLoginSuccess(response.user);
     }).catch(function(reason){  //Unexpected fetch fault 
         userLoginError(["Unexpected new user fetch() fault: " + reason]);
+    });
+}
+
+function userUpdate(){
+    console.log("test");
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let request = "/GarlicUpdateUserEndpoint?phone=" + encodeURI(phone) + "&email=" + encodeURI(email);
+    fetch(request)
+    .then(response => response.json())              //convert return data to json
+    .then(function(response){   //Callback from backend
+        if(response.errors.length != 0){
+            console.log("error");
+            return;
+        }
+        location.reload()
+    }).catch(function(reason){  //Unexpected fetch fault 
+        console.log("error");
+    });
+}
+
+function changePassword(){
+    console.log("test");
+    let pw = document.getElementById("pw").value;
+    let pwCheck = document.getElementById("pwCheck").value;
+    let request = "/GarlicUpdateUserEndpointPw?pw=" + encodeURI(pw) + "&pwCheck=" + encodeURI(pwCheck);
+    fetch(request)
+    .then(response => response.json())              //convert return data to json
+    .then(function(response){   //Callback from backend
+        if(response.errors.length != 0){
+            console.log("error");
+            return;
+        }
+        location.reload()
+    }).catch(function(reason){  //Unexpected fetch fault 
+        console.log("error");
     });
 }

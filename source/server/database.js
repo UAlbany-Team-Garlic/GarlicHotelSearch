@@ -101,7 +101,7 @@ function newUser(query){
     let username = query.username || "", password = query.password || "", email = query.email || "", phone = query.phone || "";
     let returnObject = new UserRes();
     try{
-        returnObject.errors = credValidator.credValidation(username, password, email, phone);     //re-validate credentials server side
+        //returnObject.errors = credValidator.credValidation(username, password, email, phone);     //re-validate credentials server side
         if(returnObject.errors.length != 0){
             returnObject.errors.push("If you are seeing this message, you are illegally using the /GarlicAccountCreationEndpoint endpoint")
             return returnObject;

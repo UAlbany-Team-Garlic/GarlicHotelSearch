@@ -349,15 +349,16 @@ p#lb-desc {
   color: #d0d0d0; }
 
 #lb-fav {
-  height: 25px;
-  width: 25px;
+  height: 23px;
+  width: 23px;
   background: none;
   border: 2px solid yellow;
   position: absolute;
   top: 15px;
   left: 15px;
   border-radius: 50%;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: background .3s ease; }
 
 .lb-fav-active {
   background: yellow !important; }
@@ -365,10 +366,23 @@ p#lb-desc {
 #lb-exit-btn {
   height: 25px;
   width: 25px;
-  background: red;
+  background: #fff;
   position: absolute;
   top: 15px;
-  right: 15px; }
+  right: 15px;
+  border-radius: 50%;
+  cursor: pointer; }
+
+#lb-exit-p {
+  text-align: center;
+  color: #22222c;
+  font-weight: 700;
+  position: relative;
+  top: -6px;
+  font-size: 1.4em; }
+
+#lb-exit-btn:hover {
+  opacity: .7; }
 
 img#listing-lightbox-img {
   width: 100%;
