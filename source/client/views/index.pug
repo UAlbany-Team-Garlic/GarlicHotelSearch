@@ -11,9 +11,25 @@ div(class="container-block no-padding" id='searchContainer')
                     h1(class="header" style="color: #fff; font-weight: 500") Search Hotels
                         div(class="header-icon search-icon") 
                     input(type="text" placeholder="Boston, MA" class="form" id="searchInput")
-                    button(class="dates")
+                    input(type="text" placeholder="11/3/2020-11/9/2020" class="form" id="dates" style="font-size: 1.25em; padding: 28px 20px;")
+                    input(type="text" placeholder="Beds" class="form" id="beds" style="font-size: 1.25em; padding: 28px 20px;")
                     button(id="searchBtn" class="search" onclick="runSearch()") Search Hotels
 <div id="resultGroup">
     div(class='container no-padding' style="position: relative")
         button(class="search" id='searchBack' onclick="runSearch()") Back to search
-          button(class="search" id='numResults') Filter
+        //button(class="search" id='numResults') Filter
+    div(class='container no-padding')
+        div(class='row' id="searchResults")
+    div(id='listing-lightbox')
+        img(id='listing-lightbox-img' src="views/includes/imgs/beach2.png")
+        div(id="lb-fav" onclick="lbFavorite()")
+        div(id="lb-exit-btn")
+        div(class="col-container" stlye="background: #")
+            h1(class='subheader' id="lb-name")
+            h1(class='subheader' id="lb-addr")
+            h1(class='subheader' id="lb-price") $399
+            h1(class='subheader' id="lb-stars") ★★★★☆
+            h1(class='subheader' id="lb-phone")
+            p(class="paragraph" id='lb-desc-title') Ameninties
+            p(class="paragraph" id='lb-desc') Pool, Hot tub, Free Wi-Fi, Mini-bar, Private Beach Access, Continental Breakfast, Complimentary Lamborghini Aventador
+    div(id='listing-lightbox-exit' onclick="lbAnimate()")

@@ -9,15 +9,17 @@ div(id="nav")
             a(href="/" class="menu-item-link")
                 div(class="menu-item")
                     p(class="menu-item-link-p") Home
-            a(href="/loginregister" class="menu-item-link")
-                div(class="menu-item")
-                    p(class="menu-item-link-p") Login/Register
-            a(href="/settings" class="menu-item-link")
-                div(class="menu-item")
-                    p(class="menu-item-link-p") Settings
-            a(href="/logout" class="menu-item-link")
-                div(class="menu-item")
-                    p(class="menu-item-link-p") Logout
+            if user
+                a(href="/settings" class="menu-item-link")
+                    div(class="menu-item")
+                        p(class="menu-item-link-p") Settings
+                a(href="/logout" class="menu-item-link")
+                    div(class="menu-item")
+                        p(class="menu-item-link-p") Logout
+            else
+                a(href="/loginregister" class="menu-item-link")
+                    div(class="menu-item")
+                        p(class="menu-item-link-p") Login/Register
         div(class="nav-hamburger" id="hamburger" onclick="hamburger()")
             div(class="nav-hamburger-wrapper")
                 div(class="nav-hamburger-line-top")

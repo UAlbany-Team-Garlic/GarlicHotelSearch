@@ -18,8 +18,12 @@ function runSearch() {
   let encodedSearchText = encodeURIComponent(
     document.getElementById("searchInput").value
   );
-  let encodedDates = encodeURIComponent("null"); //TODO: pass required date range
-  let encodedBeds = encodeURIComponent("null"); //TODO: pass required beds
+  let encodedDates = encodeURIComponent(
+    document.getElementById("dates").value
+  ); //TODO: pass required date range
+  let encodedBeds = encodeURIComponent(
+    document.getElementById("beds").value
+  ); //TODO: pass required beds
 
   //Pass Values to the backend's search endpoint
   fetch(

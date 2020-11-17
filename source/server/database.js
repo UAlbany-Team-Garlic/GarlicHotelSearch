@@ -119,12 +119,12 @@ exports.newUser = newUser;
 
 //get a query with username and password, return a user object to be saved in the session
 function authenticate(query){
-    let username = query.username || "", password = query.password || "";
+    let username = query.username, password = query.password;
     let returnObject = new UserRes();
     try{
         returnObject.user = new User(username);
         if(bcrypt.compareSync(password, returnObject.user.passHash))
-            returnObject = new UserRes(null, ["Incorrect Password, please try again."]);
+            returnObject.user = new User(username);
     }catch(error){
         returnObject.errors.push("Server Side Error: " + error.message)
     }finally{

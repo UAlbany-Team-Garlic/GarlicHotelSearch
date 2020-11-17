@@ -2,22 +2,20 @@ include includes/header.pug
 
 div(class="container no-padding")
     div(class='row')
-        div(class='four col')
+        div(class='six col')
             div(class='col-container' style="background: none")
-                div(class='settingsPic')
-                    img(src="views/includes/imgs/ph-profile-picDARK.png")
-                h1(class='subheader' style="text-align: center; color: #fff") user
-                label(for='file' class='file') Change Profile Picture
-                input(type='file' id='file')
+                h1(class='subheader') Change Password
+                label Password
+                input(type='text' class='form')
+                label Password Check
+                input(type='text' class='form')
+                button(class="search" id="update" style="width: 100%") Change Password
         div(class='six col')
             div(class='col-container' style="background: none")
                 h1(class='subheader') User Settings
-                label Settings 1
-                input(type='text' class='form')
-                label Settings 2
-                input(type='text' class='form')
-                label Settings 3
-                input(type='text' class='form')
-                label Settings 4
-                input(type='text' class='form')
-                button(class="search" id="update") Update
+                label Email
+                input(type='text' class='form' value=`${user.email}`)
+                label Phone
+                input(type='text' class='form' value=`${user.phone}`)
+                button(class="search" id="update" style="width: 100%") Update
+                

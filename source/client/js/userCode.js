@@ -49,9 +49,6 @@ function credValidation(username, password, email, phone){
     return errors;
 }
 
-//export cred validation so it can be used backend
-exports.credValidation = credValidation;
-
 //This function will be called by the frontend when a new user is to be created
 function newUser(){
     //Get New User Data
@@ -86,8 +83,6 @@ function newUser(){
     });
 } 
 
-exports.newUser = newUser;
-
 //============== User Login ======================================================================================
 
 
@@ -98,6 +93,7 @@ function userLoginError(errors){
 
 function userLoginSuccess(userDetails){
     console.log("You are successfully logged in as " + userDetails.username);
+    location.reload();
 }
 
 function userLogin(){
@@ -116,5 +112,3 @@ function userLogin(){
         userLoginError(["Unexpected new user fetch() fault: " + reason]);
     });
 }
-
-exports.userLogin = userLogin;

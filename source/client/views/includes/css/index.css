@@ -147,12 +147,13 @@ h1.loginRegister {
 
 img.hotel-img {
   width: 100%;
-  height: 150px;
+  height: 250px;
   background: url("../imgs/beach2.png") no-repeat;
   background-position: center;
   background-size: cover;
-  border: none;
-  outline: none; }
+  border: none !important;
+  outline: none !important;
+  background-color: none !important; }
 
 div#row {
   position: absolute;
@@ -190,7 +191,7 @@ button.dates {
 button#searchBtn {
   font-size: 1.3em;
   padding: 10px 40px;
-  margin-top: 13px; }
+  margin-top: 8px; }
 
 #searchContainer {
   transition: opacity .4s ease; }
@@ -198,6 +199,13 @@ button#searchBtn {
 .searchContainer-active {
   opacity: 0;
   pointer-events: none; }
+
+input#dates {
+  width: 49.2%; }
+
+input#beds {
+  width: 49.2%;
+  float: right; }
 
 #resultGroup {
   display: none;
@@ -245,6 +253,10 @@ button#numResults:hover {
     width: calc(50% - 22px);
     padding-right: 0;
     padding-left: 0; }
+  input#dates {
+    width: 100%; }
+  input#beds {
+    width: 100%; }
   h1#numResults {
     top: 103px;
     left: 245px; }
@@ -259,18 +271,117 @@ button#numResults:hover {
 
 div#listing-lightbox {
   height: 100vh;
-  width: 100vw;
-  background: red;
+  width: 600px;
+  background: #22222c;
   position: fixed;
-  z-index: 1000;
+  z-index: 1001;
   top: 0;
   left: 0;
   opacity: 0;
-  pointer-events: none; }
+  pointer-events: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity .2s ease; }
 
 .listing-lightbox-active {
   opacity: 1 !important;
   pointer-events: all !important; }
+
+div#listing-lightbox-exit {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+  transition: opacity .2s ease; }
+
+div.listing-lightbox-exit-active {
+  opacity: 0.8 !important;
+  pointer-events: all !important; }
+
+h1#lb-name {
+  color: #fff;
+  font-weight: 500;
+  margin-top: -18px;
+  margin-bottom: 0;
+  font-size: 3em; }
+
+h1#lb-addr {
+  color: #7ad68d;
+  font-weight: 500;
+  margin-top: -15px;
+  font-size: 1.4em; }
+
+h1#lb-stars {
+  color: orange;
+  font-weight: 500;
+  margin-top: -10px;
+  font-size: 1.4em;
+  margin-bottom: 10px; }
+
+h1#lb-price {
+  color: #7ad68d;
+  font-weight: 700;
+  margin-top: -5px;
+  font-size: 1.3em; }
+
+h1#lb-phone {
+  color: #e3e3e3;
+  font-weight: 400;
+  margin-top: -15px;
+  font-size: 1em; }
+
+p#lb-desc-title {
+  font-size: 1, 1em;
+  margin-top: 10px;
+  color: #fff;
+  margin-bottom: -9px; }
+
+p#lb-desc {
+  font-size: .9em;
+  margin-top: 10px;
+  color: #d0d0d0; }
+
+#lb-fav {
+  height: 25px;
+  width: 25px;
+  background: none;
+  border: 2px solid yellow;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border-radius: 50%;
+  cursor: pointer; }
+
+.lb-fav-active {
+  background: yellow !important; }
+
+#lb-exit-btn {
+  height: 25px;
+  width: 25px;
+  background: red;
+  position: absolute;
+  top: 15px;
+  right: 15px; }
+
+img#listing-lightbox-img {
+  width: 100%;
+  height: auto;
+  max-height: 400px; }
+
+@media only screen and (max-width: 600px) {
+  div#listing-lightbox {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transform: translateX(0%); } }
 
 .list-group {
   cursor: pointer;
@@ -295,3 +406,21 @@ div.settingsPic img {
   position: relative;
   left: 50%;
   transform: translateX(-50%); }
+
+.favorite {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  z-index: 200;
+  background: none;
+  border: 2px solid yellow;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  cursor: pointer; }
+
+.favorite:hover {
+  opacity: .7; }
+
+.fav-active {
+  background: yellow !important; }

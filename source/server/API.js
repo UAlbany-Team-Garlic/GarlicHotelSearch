@@ -31,7 +31,7 @@ function search(searchText, daterange, numBeds){
     let listings = [];
     for(let i = 0; i < 20; i++){
         let random = Math.floor(Math.random() * 100)
-        listings[i] = new Listing("Hotel " + random, random + " rd NY", random, random *3, 
+        listings[i] = new Listing("Hotel " + random, random + " Placeholder Road, Boston, MA", random, random *3, 
         ["feature " + (random + 3), "feature " + (random + 3), "feature " + (random + 3)],
         "What is this?", "What is this?", ["imgURL1", "imgURL2", "imgURL3"], "(231) 712-2312", random);
     }
@@ -39,4 +39,3 @@ function search(searchText, daterange, numBeds){
 }
 
 exports.search = search;
-
