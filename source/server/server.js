@@ -61,7 +61,8 @@ app.get("/loginregister", function (req, res) {
 app.get("/settings", function (req, res) {
     if(req.session.user){
         res.render("settings.pug", {
-            user: req.session.user
+            user: req.session.user,
+            favs: DatabaseInterface.getFavs(req.session.user)
         })
     }else{
         res.redirect("/")
@@ -146,15 +147,15 @@ app.get("/GarlicUpdateFavorites", function(req, res){
             return res.json({errors:["Can't favorite, not logged in"], msg:null});
         let favorites = database.query("SELECT hotel_id FROM favorites WHERE user_id=?", ["" + req.session.user.userID])
         console.log(favorites);
-        if(JSON.stringify(favorites).includes("" + req.query.name.hashCode())){
+        if(JSON.stringify(favorites).includes("" + req.query.name)){
             console.log("Item is already in favorites, removing");
-            database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + req.session.user.userID, "" + req.query.name.hashCode()])
-            req.session.user.favorites.push(req.query.name.hashCode());
+            database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + req.session.user.userID, "" + req.query.name])
+            //req.session.user.favorites.splice(req.session.user.favorites.indexOf(req.query.name), 1)
             return res.json({errors:[], msg:"Removed from DB"});
         }else{
             console.log("Item is not in favorites, adding");
-            database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + req.session.user.userID, "" + req.query.name.hashCode()]);
-            req.session.user.favorites.splice(req.session.user.favorites.indexOf(req.query.name.hashCode()), 1)
+            database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + req.session.user.userID, "" + req.query.name]);
+            //req.session.user.favorites.push(req.query.name);
             return res.json({errors:[], msg:null});
         }
     }catch(e){

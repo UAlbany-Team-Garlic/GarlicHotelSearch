@@ -108,6 +108,12 @@ exports.UserRes = UserRes;
 
 //=========================== User Functions ==============================================================================
 
+
+function getFavs(user){
+    return database.query("SELECT hotel_id FROM favorites WHERE user_id=?", ["" + user.userID])
+}
+exports.getFavs = getFavs;
+
 function newUser(query){
     let username = query.username || "", password = query.password || "", email = query.email || "", phone = query.phone || "";
     let returnObject = new UserRes();

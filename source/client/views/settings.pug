@@ -19,7 +19,7 @@ div(class="container no-padding")
             button(class="search" id="update" style="width: 100%" onclick="userUpdate()") Update
 h1() Favorites:
 ul
--for(let i = 0; i < user.favorites.length; i++)
-    li(id=`fav${i}`)= user.favorites[i].hotel_id 
+-for(let i = 0; i < favs.length; i++)
+    li(id=`fav${i}`)= favs[i].hotel_id 
     button(id=`favb${i}` onclick=`delFavorite('fav${i}', 'favb${i}')`) Remove fav!{i}
 script(src="../../../js/userCode.js")
