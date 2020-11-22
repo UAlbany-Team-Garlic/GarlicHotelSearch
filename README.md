@@ -23,10 +23,9 @@
 ## Setup
 0. Install node.js and npm, make sure they're on your path.
 1. Clone the project to your local machine.
-2. Run `Setup.bat` in the root directory, this will install the node packages needed for the backend, the frontend, and build the frontend.
+2. Run `npm install` in the `source/server` directory, this will install the node packages needed for the backend, the frontend, and build the frontend.
 3. Obtain a copy of `databaseCredentials.json` pinned in the discord for sync-mysql or write your own in, save the file at `/source/server/databaseCredentials.json`. You also need to @ethan to request he allows your IP through the database firewall. 
-4. There are 3 ways to run the application test, run `/tests/Test.bat`, run npm test from the package.json in `/source/server`, or use the vs code task `Test Server` found in `/.vscode/tasks.json` all of these are just diffrent ways of running `/tests/Test.bat`. To test with good debuging tools you need [the VS code extension for chrome debugging](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) and can then use the launch debugging config provided by `/.vscode/launch.json`.
-
+4. There are 2 ways to run the application test, run `npm start` from the `package.json` in `/source/server`, or use the vs code debug tool with the `Launch Appliction` compound found in `/.vscode/launch.json`. To test with vs code debuging tools you need [the VS code extension for chrome debugging](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) and can then use the launch debugging config provided by `/.vscode/launch.json`.
 
 ## Layout
 #### Root
