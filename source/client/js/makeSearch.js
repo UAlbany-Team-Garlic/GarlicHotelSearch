@@ -5,9 +5,12 @@
 function searchSuccessCallback(data) {
   console.log(data);
   if(data.error)
-    searchFailureCallback(data.error)
+    searchFailureCallback(data.error);
   else
-    displayData(data, data.length);
+    if(data.length == 0)
+      alert("Hmmm, it looks like there were no hotels matching that query, try again.");
+    else
+      displayData(data, data.length);
 }
 
 //This function is called when the search fails for any reason

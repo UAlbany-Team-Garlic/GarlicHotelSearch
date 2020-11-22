@@ -17,12 +17,23 @@ function hashPassword(password){
     return bcrypt.hashSync(password, Number(10));
 }
 
+String.prototype.hashCode = function(){
+	let hash = 0;
+	if(this.length == 0) return hash;
+	for(let i = 0; i < this.length; i++){
+		let char = this.charCodeAt(i);
+		hash = ((hash<<5)-hash)+char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+	return hash;
+}
+
 //=========================== User Models ==============================================================================================================================
 //All SQL queries should take place exclusively within the User Model
 
 //This object models a user
 class User{
-    #userID         //User ID must be private so it dosn't turn into JSON and get sent client side, also shouldn't be changed from outside
+    userID         //User ID must be private so it dosn't turn into JSON and get sent client side, also shouldn't be changed from outside
     #oldFavorites   //preserve the orginal favorites updating favorites
     #deleted        //Weather the object has been deleted
     /*  1) new User(username) : get a user who already exists
@@ -38,11 +49,11 @@ class User{
         }else if(params.length != 1) // constructor of type neither one nor 2
             throw new Error("Invalid Construction of User Object");
         let row = database.query('SELECT * FROM users WHERE user=?', [params[0]])[0];
-        this.#userID = row.id;
+        this.userID = row.id;
         this.username = row.user;
         this.email = row.email;
         this.phone = row.phone;
-        this.favorites = database.query("SELECT hotel_id FROM favorites WHERE user_id=?", ["" + this.#userID]);
+        this.favorites = database.query("SELECT hotel_id FROM favorites WHERE user_id=?", ["" + this.userID]);
         this.passHash = row.pw;
         this.prevPassHash = row.pw_prev;
         this.#deleted = false;
@@ -61,16 +72,16 @@ class User{
             this.username, this.passHash, this.prevPassHash, this.email, this.phone]);
         let deletedFavs = this.#oldFavorites.filter(e => !this.favorites.includes(e)); //in oldFavorites not favorites  
         for(let i = 0; i < deletedFavs.length; i++) 
-            database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + this.#userID, deletedFavs[i]]);
+            database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + this.userID, deletedFavs[i]]);
         let newFavs = this.favorites.filter(e => !this.#oldFavorites.includes(e));      //in favorites not oldFavorites
         for(let i = 0; i < newFavs.length; i++)
-            database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + this.#userID, newFavs[i]]);
+            database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + this.userID, newFavs[i]]);
     }
 
     removeFromDB(){     //remove a user from the database
         this.#deleted = true;
-        database.query("DELETE FROM users WHERE user_id=?", ["" + this.#userID]);
-        database.query("DELETE FROM favorites WHERE user_id=?", ["" + this.#userID]);
+        database.query("DELETE FROM users WHERE user_id=?", ["" + this.userID]);
+        database.query("DELETE FROM favorites WHERE user_id=?", ["" + this.userID]);
     }
 
     authenticate(password){     //determine if a user really is 

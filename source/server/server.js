@@ -138,4 +138,43 @@ app.get("/GarlicUpdateUserEndpointPw", function(req, res){
     }
 });
 
+app.get("/GarlicUpdateFavorites", function(req, res){
+    try{
+        console.log("Favorite Update Query");
+        console.log(req.query);
+        if(!req.session || !req.session.user)
+            return res.json({errors:["Can't favorite, not logged in"], msg:null});
+        let favorites = database.query("SELECT hotel_id FROM favorites WHERE user_id=?", ["" + req.session.user.userID])
+        console.log(favorites);
+        if(JSON.stringify(favorites).includes("" + req.query.name.hashCode())){
+            console.log("Item is already in favorites, removing");
+            database.query("DELETE FROM favorites WHERE user_id=? AND hotel_id=?", ["" + req.session.user.userID, "" + req.query.name.hashCode()])
+            req.session.user.favorites.push(req.query.name.hashCode());
+            return res.json({errors:[], msg:"Removed from DB"});
+        }else{
+            console.log("Item is not in favorites, adding");
+            database.query("INSERT INTO favorites(user_id, hotel_id) VALUES (?, ?)", ["" + req.session.user.userID, "" + req.query.name.hashCode()]);
+            req.session.user.favorites.splice(req.session.user.favorites.indexOf(req.query.name.hashCode()), 1)
+            return res.json({errors:[], msg:null});
+        }
+    }catch(e){
+        return res.json({errors:[e.message], msg:null});
+    }
+});
+
+/*
+app.get("/GarlicListFavorites", function(req, res){
+    try{
+        console.log("Favorite Update Query");
+        console.log(req.query);
+        if(!req.session || !req.session.user)
+            return res.json({errors:["Can't favorite, not logged in"], favs:null});
+        let favorites = database.query("SELECT hotel_id FROM favorites WHERE user_id=?", ["" + req.session.user.userID])
+        console.log(favorites);
+        return res.json({errors:[], favs:favorites});
+    }catch(e){
+        return res.json({errors:[e.message], favs:null});
+    }
+}*/
+
 app.listen(8080);

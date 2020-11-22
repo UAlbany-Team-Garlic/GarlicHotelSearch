@@ -2,6 +2,7 @@ include includes/header.pug
 
 script(src="js/currency.js")
 script(src="js/makeSearch.js")
+script(src="js/userCode.js")
 script(src="js/displayData.js")
 
 div(class="container-block no-padding" id='searchContainer')
@@ -39,6 +40,7 @@ div(class="container-block no-padding" id='searchContainer')
             h1(class='subheader' id="lb-stars") 
             //h1(class='subheader' id="lb-phone")
             p(class="paragraph" id='lb-desc-title') Ameninties
-            p(class="paragraph" id='lb-desc') 
-            button(id="lb-goto" class="search" onclick="") Click Here to Book!
+            p(class="paragraph" id='lb-desc')
+            a(id="lb-goto" href="" target="_blank")
+                button(class="search" onclick="") Click Here to Book!
     div(id='listing-lightbox-exit' onclick="lbAnimate()")

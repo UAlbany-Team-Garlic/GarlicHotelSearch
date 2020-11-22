@@ -61,9 +61,10 @@ def getData():
             loopCounter = len(titles)
         else:
             loopCounter = len(titles)'''
-        for i in range(0, min(20, len(externalLink))):
-            externalLink[i]['href'] = 'https://expedia.com' + externalLink[i]['href']
-            listArg.append(Listing(titles[i].text, price[i].text, adults, beds, "", "", random.uniform(4.0, 4.6), getFeatures(), getImage(), getAddress(externalLink[i]['href']), externalLink[i]['href']))
+        if len(externalLink) > 0:
+            for i in range(0, min(20, len(externalLink))):
+                externalLink[i]['href'] = 'https://expedia.com' + externalLink[i]['href']
+                listArg.append(Listing(titles[i].text, price[i].text, adults, beds, "", "", random.uniform(4.0, 4.6), getFeatures(), getImage(), getAddress(externalLink[i]['href']), externalLink[i]['href']))
         return (listArg)
 
 #We just don't have the ability to wait 40 seconds for results even for just 10
@@ -80,9 +81,10 @@ with open("fakestreets.txt") as f:
 def getAddress(url):
     return fakestreets[random.randint(0, 99)].split(".")[1][1:].rstrip() + "," + sys.argv[0] + "," + sys.argv[1] 
 
-fakeImageCounter = 0
+
 with open("fakeimages.txt") as f:
     fakeimages = f.readlines()
+fakeImageCounter = random.randint(0, len(fakeimages))
 def getImage():
     global fakeImageCounter
     fakeImageCounter = fakeImageCounter + 1

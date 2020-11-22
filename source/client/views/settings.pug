@@ -17,4 +17,9 @@ div(class="container no-padding")
             label Phone
             input(type='text' class='form' id="phone" value=`${user.phone}`)
             button(class="search" id="update" style="width: 100%" onclick="userUpdate()") Update
+h1() Favorites:
+ul
+-for(let i = 0; i < user.favorites.length; i++)
+    li(id=`fav${i}`)= user.favorites[i].hotel_id 
+    button(id=`favb${i}` onclick=`delFavorite('fav${i}', 'favb${i}')`) Remove fav!{i}
 script(src="../../../js/userCode.js")

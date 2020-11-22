@@ -1,3 +1,4 @@
+
 var DATA;
 
 function displayData(data, n) {
@@ -72,7 +73,7 @@ function lbAnimate(i) {
     let rating = Math.floor(data.rating);
     lbStars.innerHTML = "★".repeat(rating) + "☆".repeat(5 - rating);
     lbDesc.innerHTML = data.features.join(", ");
-    lbGoTo.onclick = "window.location = " + data.link + ";";
+    lbGoTo.href = data.link;
 }
 
 function favorites(i) {
@@ -84,4 +85,5 @@ function favorites(i) {
 function lbFavorite() {
     const btn = document.getElementById("lb-fav")
     btn.classList.toggle("lb-fav-active")
+    addFavorite();
 }

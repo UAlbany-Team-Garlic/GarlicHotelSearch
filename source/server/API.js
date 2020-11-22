@@ -39,13 +39,17 @@ class Bed{
     return listings;
 }*/
 
-function search(searchText, daterange, numBeds, res){ 
-    let location = searchText.split(",")
+function search(searchText, daterange, numBeds, res){
+    let location = [searchText, "NY"];  //default to NY
+    if(searchText.includes(","))
+        location = searchText.split(",");
+    if(!numBeds)
+        numBeds = 2;
     //let dates = searchText.split("-")
-    //let date1 = dates[]
+    //let date1 = dates[] //dates are a luxary we can do without
     console.log(process.cwd());
     const exec = require("child_process").exec;
-    exec("python scrape.py " + location[0] + "  " + location[1] + " 2 2 2020 11 30 2020 12 3", function(error, stdout, stderr){
+    exec(`python scrape.py "` + location[0] + `" "` + location[1] + `" ` + numBeds + ` ` + numBeds + ` 2020 11 30 2020 12 3`, function(error, stdout, stderr){
         try{
             if(stderr)
                 return res.json({error:stderr});

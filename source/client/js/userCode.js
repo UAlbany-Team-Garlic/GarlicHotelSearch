@@ -149,3 +149,37 @@ function changePassword(){
         console.log("error");
     });
 }
+
+
+function addFavorite(){
+    let name = document.getElementById("lb-name").innerHTML;
+    let request = "/GarlicUpdateFavorites?name=" + encodeURI(name)
+    fetch(request)
+    .then(response => response.json())              //convert return data to json
+    .then(function(response){   //Callback from backend
+        if(response.errors.length != 0)
+            console.error("Error:" + response.errors.join(","));
+        else
+            console.log("Favorite Sucess" + response.msg);
+    }).catch(function(reason){  //Unexpected fetch fault 
+        console.log("Error: could not call add favorite");
+    });
+}
+
+function delFavorite(liid, bid){
+    let elm = document.getElementById(liid);
+    let name = elm.innerHTML;
+    elm.remove();
+    document.getElementById(bid).remove();
+    let request = "/GarlicUpdateFavorites?name=" + encodeURI(name)
+    fetch(request)
+    .then(response => response.json())              //convert return data to json
+    .then(function(response){   //Callback from backend
+        if(response.errors.length != 0)
+            console.error("Error:" + response.errors.join(","));
+        else
+            console.log("Favorite Sucess" + response.msg);
+    }).catch(function(reason){  //Unexpected fetch fault 
+        console.log("Error: could not call add favorite");
+    });
+}
