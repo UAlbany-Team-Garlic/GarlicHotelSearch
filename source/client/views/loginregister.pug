@@ -19,6 +19,8 @@ div(class="container no-padding")
                         label(for="pwCheck") Enter Password Again
                         input(class="form" type="password" name="pwCheck" id="pwCheck")
                         button(class="form" onclick="newUser()") Register
+                        div#errorBoxRegister
+                            p(id="errorBoxRegisterText" class="paragraph")
                     div(id="loginForm")
                         h1(class="loginRegister") 
                             span(onclick="loginRegisterSwitch()" id="loginSwitch") Register |&nbsp;
@@ -28,5 +30,7 @@ div(class="container no-padding")
                         label(for="pw") Password
                         input(class="form" type='password' name="pwLogin" id="pwLogin")
                         button(class="form" onclick="userLogin()") Login
+                        div#errorBoxLogin 
+                            p(id="errorBoxLoginText" class="paragraph")
 script(src="../../../js/loginregister.js")
 script(src="../../../js/userCode.js")

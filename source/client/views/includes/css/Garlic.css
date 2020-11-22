@@ -35,6 +35,12 @@ a {
   display: flex;
   align-items: flex-start; }
 
+.container.max-width {
+  max-width: 1400px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); }
+
 .container-block {
   height: 100vh;
   width: 100%;
@@ -292,14 +298,13 @@ input[type="email"].form {
   float: left;
   margin: 7px 0;
   border: none;
-  background: #fff;
+  background: #53576b;
   transition: background .2s ease; }
 
 input[type="text"].form:focus,
 input[type="password"].form:focus,
 input[type="email"].form:focus {
-  background: #e1e1f3;
-  border-color: #e1e1f3; }
+  background: #727791; }
 
 button.form {
   background: #7ad68d;

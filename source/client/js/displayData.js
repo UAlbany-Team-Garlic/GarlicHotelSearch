@@ -12,9 +12,8 @@ function displayData(data, n) {
             row.innerHTML += `
             <div class='four col'>
                 <div class='list-group' id=list-${i}style="position: relative;">
-                    <div class="favorite" id="fav" onclick='favorites(${i})'></div>
                     <div onclick="lbAnimate(${i})">
-                        <img class="hotel-img" src="${data[i].image}"></img>
+                        <div class="hotel-img" style="background: url('${data[i].image}'); background-position: center; background-size: cover;"></div>
                         <!--<p class="paragraph-md">${data[i].address}
                         <br>${data[i].contactNum}
                         <br>${data[i].rating}
@@ -69,9 +68,8 @@ function lbAnimate(i) {
     lbAddr.innerHTML = data.address;
     lbPrice.innerHTML = data.preTaxNight;
     lbPrice.unitPrice = parseInt(data.preTaxNight.substring(1));
-    lbRate.innerHTML = "Rated: " + data.rating + "/5";
     let rating = Math.floor(data.rating);
-    lbStars.innerHTML = "★".repeat(rating) + "☆".repeat(5 - rating);
+    lbStars.innerHTML = data.rating + " " + "★".repeat(rating) + "☆".repeat(5 - rating);
     lbDesc.innerHTML = data.features.join(", ");
     lbGoTo.href = data.link;
 }

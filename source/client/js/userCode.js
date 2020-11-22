@@ -14,6 +14,13 @@
 
 //Use this function to set up the frontend to display errors durring user creation
 function newUserError(errors){
+    let errorBoxText = document.getElementById("errorBoxRegisterText");
+    let errorBox = document.getElementById("errorBoxRegister");
+    if (!errorBox.classList.contains("error-active"))
+    {
+        errorBox.classList.toggle("error-active")
+    }
+    errorBoxText.innerHTML = "Error: " + errors[0];
     for(let i = 0; i < errors.length; i++)  //Right now it just console.error s all issues
         console.error("User Creation Error:" + errors[i]);
 }
@@ -35,9 +42,9 @@ function credValidation(username, password, email, phone){
     const EM_MAX_LENGTH = 30;
     let errors = []; 
     if(username.length < UN_MIN_LENGTH || username.length > UN_MAX_LENGTH)      //Check usernames meet length requirements
-        errors.push("Usernames must be between " + UN_MIN_LENGTH + " and " + UN_MAX_LENGTH + "chars");
+        errors.push("Usernames must be between " + UN_MIN_LENGTH + " and " + UN_MAX_LENGTH + " characters");
     if(password.length < PW_MIN_LENGTH || password.length > PW_MAX_LENGTH)      //Check passwords meet length requirements
-        errors.push("Passwords must be between " + PW_MIN_LENGTH + " and " + PW_MAX_LENGTH);
+        errors.push("Passwords must be between " + PW_MIN_LENGTH + " and " + PW_MAX_LENGTH + "characters");
     if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]/.test(password))           //Check passwords meet complexity requirements
         errors.push("Password must contain at least one lowercase, one uppercase, and one number" + "chars");
     if(email.length > EM_MAX_LENGTH)
@@ -88,6 +95,13 @@ function newUser(){
 
 
 function userLoginError(errors){
+    let errorBoxText = document.getElementById("errorBoxLoginText");
+    let errorBox = document.getElementById("errorBoxLogin");
+    if (!errorBox.classList.contains("error-active"))
+    {
+        errorBox.classList.toggle("error-active")
+    }
+    errorBoxText.innerHTML = "Username or password incorrect. Try again";
     for(let i = 0; i < errors.length; i++)  //Right now it just console.error s all issues
         console.error("User authentication Error:" + errors[i]);
 }
