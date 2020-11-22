@@ -83,8 +83,7 @@ app.get("/GarlicSearchEndpoint", function (req, res) {
   let dateRange = decodeURI(req.query.dates);
   let beds = decodeURI(req.query.beds);
   console.log("Recived Request to search for " + searchText + " " + dateRange + " " + beds);
-  let listingObject = HotelAPI.search(searchText); //Call our hotel search interface in API.js
-  res.json(listingObject);
+  HotelAPI.search(searchText, dateRange, beds, res); //Call our hotel search interface in API.js
 });
 
 //Account Creation Handling

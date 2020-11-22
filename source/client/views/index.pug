@@ -1,5 +1,6 @@
 include includes/header.pug
 
+script(src="js/currency.js")
 script(src="js/makeSearch.js")
 script(src="js/displayData.js")
 
@@ -16,7 +17,7 @@ div(class="container-block no-padding" id='searchContainer')
                     button(id="searchBtn" class="search" onclick="runSearch()") Search Hotels
 <div id="resultGroup">
     div(class='container no-padding' style="position: relative")
-        button(class="search" id='searchBack' onclick="runSearch()") Back to search
+        button(class="search" id='searchBack' onclick="revAnimate()") Back to search
         //button(class="search" id='numResults') Filter
     div(class='container no-padding')
         div(class='row' id="searchResults")
@@ -28,9 +29,16 @@ div(class="container-block no-padding" id='searchContainer')
         div(class="col-container" stlye="background: #")
             h1(class='subheader' id="lb-name")
             h1(class='subheader' id="lb-addr")
-            h1(class='subheader' id="lb-price") $399
-            h1(class='subheader' id="lb-stars") ★★★★☆
-            h1(class='subheader' id="lb-phone")
+            select#currency(onchange="CC()")
+                option(value="USD") USD
+                option(value="Euro") Euro
+                option(value="Yen") Yen
+                option(value="Pound") Pound
+            h1(class='subheader' id="lb-price")
+            h1(class='subheader' id="lb-rating") 
+            h1(class='subheader' id="lb-stars") 
+            //h1(class='subheader' id="lb-phone")
             p(class="paragraph" id='lb-desc-title') Ameninties
-            p(class="paragraph" id='lb-desc') Pool, Hot tub, Free Wi-Fi, Mini-bar, Private Beach Access, Continental Breakfast, Complimentary Lamborghini Aventador
+            p(class="paragraph" id='lb-desc') 
+            button(id="lb-goto" class="search" onclick="") Click Here to Book!
     div(id='listing-lightbox-exit' onclick="lbAnimate()")

@@ -13,7 +13,7 @@ function displayData(data, n) {
                 <div class='list-group' id=list-${i}style="position: relative;">
                     <div class="favorite" id="fav" onclick='favorites(${i})'></div>
                     <div onclick="lbAnimate(${i})">
-                        <img class="hotel-img"></img>
+                        <img class="hotel-img" src="${data[i].image}"></img>
                         <!--<p class="paragraph-md">${data[i].address}
                         <br>${data[i].contactNum}
                         <br>${data[i].rating}
@@ -46,6 +46,7 @@ function displayResults() {
     results.classList.toggle("results-active");
 }
 
+//★★★★☆
 function lbAnimate(i) {
     var lb = document.getElementById("listing-lightbox")
     var lbExit = document.getElementById("listing-lightbox-exit")
@@ -53,14 +54,25 @@ function lbAnimate(i) {
     var lbImg = document.getElementById("listing-lightbox-img")
     var lbPhone = document.getElementById("lb-phone")
     var lbAddr = document.getElementById("lb-addr")
+    var lbPrice = document.getElementById("lb-price")
+    var lbStars = document.getElementById("lb-stars")
+    var lbDesc = document.getElementById("lb-desc")
+    var lbRate = document.getElementById("lb-rating")
+    var lbGoTo = document.getElementById("lb-goto")
     var data = DATA[i];
     lb.classList.toggle("listing-lightbox-active");
     lbExit.classList.toggle("listing-lightbox-exit-active");
-    //lbImg.src = 
-    console.log(data);
+    lbImg.src = data.image
+    console.log(data); 
     lbName.innerHTML = data.name;
-    lbPhone.innerHTML = data.contactNum;
     lbAddr.innerHTML = data.address;
+    lbPrice.innerHTML = data.preTaxNight;
+    lbPrice.unitPrice = parseInt(data.preTaxNight.substring(1));
+    lbRate.innerHTML = "Rated: " + data.rating + "/5";
+    let rating = Math.floor(data.rating);
+    lbStars.innerHTML = "★".repeat(rating) + "☆".repeat(5 - rating);
+    lbDesc.innerHTML = data.features.join(", ");
+    lbGoTo.onclick = "window.location = " + data.link + ";";
 }
 
 function favorites(i) {

@@ -4,7 +4,10 @@
 
 function searchSuccessCallback(data) {
   console.log(data);
-  displayData(data, data.length);
+  if(data.error)
+    searchFailureCallback(data.error)
+  else
+    displayData(data, data.length);
 }
 
 //This function is called when the search fails for any reason
