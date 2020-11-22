@@ -48,6 +48,7 @@ function displayResults() {
 
 //★★★★☆
 function lbAnimate(i) {
+    document.getElementById("lb-fav").classList.remove("lb-fav-active");
     var lb = document.getElementById("listing-lightbox")
     var lbExit = document.getElementById("listing-lightbox-exit")
     var lbName = document.getElementById("lb-name")

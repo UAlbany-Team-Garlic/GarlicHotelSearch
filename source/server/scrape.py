@@ -45,7 +45,7 @@ class Listing:
 #method format = (city, stateOrCountry, adults, beds, checkinyear, checkinmonth, checkinday, checkoutyear, checkoutmonth, checkoutday)
 def getData():
         listArg = list()
-        urlArg = ('https://www.expedia.com/Hotel-Search?adults=' + sys.argv[2] + '&beds=' + sys.argv[3] + '&d1=' + sys.argv[4] + '-' + sys.argv[5] + '-' + sys.argv[6] + '/' + '%2F&d2=' + sys.argv[7] + '-' + sys.argv[8] + '-' + sys.argv[9] + '%25&destination=' + sys.argv[0] + "%20%28and%20vicinity%29%2C%20" + sys.argv[1] + '&sort=RECOMMENDED')
+        urlArg = ('https://www.expedia.com/Hotel-Search?adults=' + sys.argv[3] + '&beds=' + sys.argv[4] + '&d1=' + sys.argv[5] + '-' + sys.argv[6] + '-' + sys.argv[7] + '/' + '%2F&d2=' + sys.argv[8] + '-' + sys.argv[9] + '-' + sys.argv[10] + '%25&destination=' + sys.argv[1] + "%20%28and%20vicinity%29%2C%20" + sys.argv[2] + '&sort=RECOMMENDED')
         #print (urlArg)
         #print("\n\n")
         page = requests.get(urlArg, headers=headers)
@@ -79,7 +79,7 @@ def getAddress(url):
 with open("fakestreets.txt") as f:
     fakestreets = f.readlines()
 def getAddress(url):
-    return fakestreets[random.randint(0, 99)].split(".")[1][1:].rstrip() + "," + sys.argv[0] + "," + sys.argv[1] 
+    return fakestreets[random.randint(0, 99)].split(".")[1][1:].rstrip() + "," + sys.argv[1] + "," + sys.argv[2] 
 
 
 with open("fakeimages.txt") as f:
