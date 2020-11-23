@@ -454,3 +454,6 @@ div.settingsPic img {
 
 .error-active {
   opacity: 1 !important; }
+
+div.fav-wrapper {
+  width: 100%; }
